@@ -1,0 +1,8 @@
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #f8f8f8;
+}
+
+.active {
+    background: linear-gradient(90deg, #e64343, #f8f8f8);
+}
