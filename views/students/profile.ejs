@@ -37,15 +37,17 @@
                     </div>
 
                     <div class="row alert alert-secondary">
-                        <button class="btn btn-outline-success form-control">Node 100 10/10/20</button>
+                        <% for( let i = 0; i < payments.length; i++ ) { %>
+                        <button class="btn btn-outline-success form-control"><%= payments[i].title %> - <%= payments[i].amount %></button>
+                        <% } %>
                     </div>
                     <div class="row">
                         <div class="col-6 alert alert-info">
                             <form action="/enrollments/store" method="post">
                                 <select name="course_id" class="form-control">
-                                    <% for( let i=0; i < courses.length; i++ ) { %>
-                                        <option value="<%= courses[i].course_id %>">
-                                            <%= courses[i].title %>
+                                    <% for( let i=0; i < displayCourses.length; i++ ) { %>
+                                        <option value="<%= displayCourses[i].course_id %>">
+                                            <%= displayCourses[i].title %>
                                         </option>
                                         <% } %>
                                 </select><br>
@@ -53,7 +55,18 @@
                                 <button class="btn btn-sm btn-danger">Add Enrollment</button>
                             </form>
                         </div>
-                        <div class="col-6"></div>
+                        <div class="col-6">
+                            <form action="/payments/store" method="post">
+                                <input type="hidden" value="<%= student.student_id %>" name="student_id">
+                                <input type="text"  name="amount" class="form-control"><br>
+                                <select name="course_id" class="form-control">
+                                <% for( let i = 0; i < enrollments.length; i++ ) { %>
+                                    <option value="<%= enrollments[i].course_id %>"><%= enrollments[i].title %></option>
+                                <% } %>
+                                </select>
+                                <button class="btn btn-sm btn-success">Add Payment</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
